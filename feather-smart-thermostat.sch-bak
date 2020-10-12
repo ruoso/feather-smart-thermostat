@@ -41,8 +41,6 @@ Entry Wire Line
 	2650 2350 2750 2450
 Entry Wire Line
 	2650 2200 2750 2300
-Entry Wire Line
-	8750 3950 8850 4050
 $Comp
 L Switch:SW_Push SW2
 U 1 1 5F8CF3EB

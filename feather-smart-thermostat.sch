@@ -75,7 +75,7 @@ Entry Wire Line
 Entry Wire Line
 	2650 2950 2750 3050
 $Comp
-L Adafruit_SHT31_Breakout-eagle-import:SHT3X U1
+L feather-smart-thermostat-rescue:SHT3X-Adafruit_SHT31_Breakout-eagle-import U1
 U 1 1 5F8F5E69
 P 5550 2950
 F 0 "U1" H 5579 2303 42  0000 C CNN
@@ -86,7 +86,7 @@ F 3 "" H 5550 2950 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L components:FeatherHuzzahBoard U2
+L feather-smart-thermostat-rescue:FeatherHuzzahBoard-components U2
 U 1 1 5F905B59
 P 4700 4800
 F 0 "U2" V 5915 3900 50  0000 C CNN
@@ -143,7 +143,7 @@ Wire Wire Line
 Wire Wire Line
 	7100 1750 4000 1750
 $Comp
-L components:SingleRelayModuleD25 RELAY?
+L feather-smart-thermostat-rescue:SingleRelayModuleD25-components RELAY?
 U 1 1 5F91202D
 P 6050 6700
 F 0 "RELAY?" H 5928 6846 50  0000 L CNN
@@ -165,12 +165,12 @@ Wire Wire Line
 	6800 6150 6800 3900
 Wire Wire Line
 	6800 3900 6250 3900
-Wire Bus Line
-	8850 1700 8850 6700
-Wire Bus Line
-	2650 1850 2650 6500
 Entry Wire Line
 	8750 6000 8850 6100
 Entry Wire Line
 	2650 6050 2750 6150
+Wire Bus Line
+	8850 1700 8850 6700
+Wire Bus Line
+	2650 1850 2650 6500
 $EndSCHEMATC
