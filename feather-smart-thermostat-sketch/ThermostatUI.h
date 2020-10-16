@@ -51,7 +51,6 @@ namespace Thermostat {
     const static int EPD_RESET = -1; // can set to -1 and share with microcontroller Reset!
     const static int EPD_BUSY  = 27; // can set to -1 to not use a pin (will wait a fixed delay)
     OverrideAdafruit_SSD1675 epd;
-    bool convert_temperature_to_f;
 
     // font for the temperature
     const GFXfont *temp_font = &FreeSerifBold24pt7b;
@@ -72,7 +71,7 @@ namespace Thermostat {
       epd.clearDisplay();
     }
 
-    void print_temperature(float temperature, int slot) {
+    void print_temperature(float temperature, int slot, bool convert_temperature_to_f) {
 
       int display_temperature = int(temperature);
       std::string unit = "C";
@@ -165,8 +164,8 @@ namespace Thermostat {
       int margin = 2;
       
       draw_fixed_elements(rect_height, margin);
-      print_temperature(state.actual_temperature, 0);
-      print_temperature(state.set_temperature, 1);
+      print_temperature(state.actual_temperature, 0, state.convert_temperature_to_f);
+      print_temperature(state.set_temperature, 1, state.convert_temperature_to_f);
       print_humidity(state.actual_humidity, rect_height, margin);
 
       if (state.relay_state) {
@@ -206,14 +205,12 @@ namespace Thermostat {
       temp_up_button.setup();
       func_button.setup();
     }
-    void update(State &state) {
+    void input(State &state) {
       // check button states
-      bool must_update_screen = 0;
       if (last_temp_up_button_state ^ temp_up_button.is_pressed()) {
         if (!last_temp_up_button_state) {
           Serial.println("Temp up pressed");
           state.set_temperature++;
-          must_update_screen = 1;
         }
         last_temp_up_button_state = !last_temp_up_button_state;
       }
@@ -221,30 +218,32 @@ namespace Thermostat {
         if (!last_temp_down_button_state) {
           Serial.println("Temp down pressed");
           state.set_temperature--;
-          must_update_screen = 1;
         }
         last_temp_down_button_state = !last_temp_down_button_state;
       }
       if (last_func_button_state ^ func_button.is_pressed()) {
         if (!last_func_button_state) {
           Serial.println("Func pressed");
-          display.convert_temperature_to_f = !display.convert_temperature_to_f;
-          must_update_screen = 1;
+          state.convert_temperature_to_f = !state.convert_temperature_to_f;
         }
         last_func_button_state = !last_func_button_state;
       }
+    }
+
+    void update(State &state) {
       // see if thermostat state changed enough to trigger an update
       if (abs(state.actual_temperature - last_displayed_state.actual_temperature) > 0.5 ||
+          abs(state.set_temperature - last_displayed_state.set_temperature) > 0.5 ||
           abs(state.actual_humidity - last_displayed_state.actual_humidity) > 2.5 ||
           state.relay_state != last_displayed_state.relay_state ||
+          state.convert_temperature_to_f != last_displayed_state.convert_temperature_to_f ||
           state.online != last_displayed_state.online) {
-        must_update_screen = 1;
-      }
-      if (must_update_screen) {
+
         last_displayed_state = state;
         Serial.println("Will update Screen");
         display.update(state);
         Serial.println("Screen update complete");
+
       }
     }
   };

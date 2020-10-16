@@ -10,6 +10,7 @@ namespace Thermostat {
     float actual_current;
     bool  relay_state;
     bool  online;
+    bool  convert_temperature_to_f;
     float set_temperature = SET_TEMPERATURE_AT_REBOOT;
   };
 }

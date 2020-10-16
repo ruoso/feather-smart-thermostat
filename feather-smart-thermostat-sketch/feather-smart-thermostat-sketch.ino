@@ -34,12 +34,11 @@ void setup() {
 }
 
 void loop() {
+  ui.input(state);
   control.update(state);
-  delay(50);
   ui.update(state);
-  control.update(state);
-  delay(50);
   if (quiet_log_control++ % 100 == 0) {
     Serial.println("Temperature: " + String(state.actual_temperature) + ", Humidity: " + String(state.actual_humidity) + " Relay: "+String(state.relay_state)+" Set: "+String(state.set_temperature));
   }
+  delay(50);
 }
