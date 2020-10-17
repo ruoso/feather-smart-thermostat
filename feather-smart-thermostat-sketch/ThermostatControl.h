@@ -39,7 +39,7 @@ namespace Thermostat {
       // These analog input pins have 12-bit resolution. This means that when you read an analog input, its range may vary from 0 to 4095.
       int measured = analogRead(current_a_pin);
       float normalized = round(((measured * 3.2)/4096)*10)/10;
-      float centered = normalized ;// - 1.5;
+      float centered = normalized - 1.5;
 
       // The CPU is already too busy for us to be able to read AC and calculate it correctly. So instead we'll just check that
       // on average we have had an absolute signal bigger than 0.1 over the past 10 measurements, which will most definitely be always true
