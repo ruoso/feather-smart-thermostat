@@ -44,7 +44,6 @@ const unsigned char fire [] PROGMEM = {
 namespace Thermostat {
 
   struct Display {
-    const static int SD_CS     = 14;
     const static int SRAM_CS   = 32;
     const static int EPD_CS    = 15;
     const static int EPD_DC    = 33;
@@ -237,7 +236,8 @@ namespace Thermostat {
           abs(state.actual_humidity - last_displayed_state.actual_humidity) > 2.5 ||
           state.relay_state != last_displayed_state.relay_state ||
           state.convert_temperature_to_f != last_displayed_state.convert_temperature_to_f ||
-          state.online != last_displayed_state.online) {
+          state.wifi_online != last_displayed_state.wifi_online ||
+          state.mqtt_online != last_displayed_state.mqtt_online) {
 
         last_displayed_state = state;
         Serial.println("Will update Screen");

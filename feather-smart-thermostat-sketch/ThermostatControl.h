@@ -3,6 +3,7 @@
 
 #include <Adafruit_SHT31.h>
 #include "ThermostatState.h"
+#include "ThermostatConfig.h"
 
 namespace Thermostat {
 
@@ -34,6 +35,7 @@ namespace Thermostat {
   struct Control {
     Output output;
     Sensors sensors;
+    float temp_on_last_change;
     Control() {
     }
     void setup() {
@@ -42,10 +44,14 @@ namespace Thermostat {
     }
     void update(State& state) {
       sensors.update(state);
-      if (state.actual_temperature < state.set_temperature) {
-        state.relay_state = 1;
+      if (state.relay_state == 0) {
+        if (state.actual_temperature < state.set_temperature - state.variance/2) {
+          state.relay_state = 1;
+        }
       } else {
-        state.relay_state = 0;
+        if (state.actual_temperature > state.set_temperature + state.variance/2) {
+          state.relay_state = 0;
+        }
       }
       output.update(state);
     }

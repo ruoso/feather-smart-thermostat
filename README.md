@@ -65,4 +65,41 @@ set temperature from the local device, and that should be reflected to
 the automation system, while at the same time it should be possible
 for the automation system to override the manually set temperature.
 
+### Configuration
 
+This will read a json file named `thermostat.json` in the root of the sdcard.
+
+The sample file below explains the expected format:
+
+```
+{
+	"wifi": {
+		"ssid": "",
+	    "password": ""
+	},
+	"mqtt": {
+		"broker_host": "",
+        "broker_port": 1883,
+		"clientid": "",
+		"username": "",
+		"password": "",
+		"topics": {
+			"action": "",
+			"actual_temperature": "",
+			"actual_humidity": "",
+			"actual_current": "",
+			"target_temperature": "",
+			"temperature_command": ""
+		}
+	},
+	"temperature": {
+		"starting": 28,
+		"variance": 1
+	}
+}
+
+```
+
+Most items are self-explanatory. The `variance` setting is how much
+change on the temperature in celsius is after a change in status is
+necessary for a new change in status.
