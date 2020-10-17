@@ -196,7 +196,7 @@ namespace Thermostat {
     bool last_temp_down_button_state;
     bool last_func_button_state;
     State last_displayed_state;
-    UI() :temp_down_button(34), temp_up_button(39), func_button(36) {
+    UI() :temp_down_button(34), temp_up_button(25), func_button(26) {
     }
     void setup() {
       display.setup();

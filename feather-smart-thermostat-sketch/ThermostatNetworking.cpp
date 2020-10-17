@@ -111,6 +111,7 @@ void Networking::setup(Config& config_in) {
   ph_actual_temperature.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_actual_temperature.c_str());
   ph_actual_humidity.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_actual_humidity.c_str());
   ph_actual_current.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_actual_current.c_str());
+  ph_actual_current.always_publish = 1;
   ph_target_temperature.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_target_temperature.c_str());
   ph_target_temperature.always_publish = 1;
   mqtt_topic_temperature_command = new Adafruit_MQTT_Subscribe(mqttclient, config->mqtt_topic_temperature_command.c_str());

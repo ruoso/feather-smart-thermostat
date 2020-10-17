@@ -18,6 +18,38 @@ X 2 2 200 0 100 L 50 50 0 1 P
 ENDDRAW
 ENDDEF
 #
+# feather-smart-thermostat-rescue_CurrentSensor
+#
+DEF feather-smart-thermostat-rescue_CurrentSensor U 0 40 Y Y 1 F N
+F0 "U" 0 0 50 H V C CNN
+F1 "feather-smart-thermostat-rescue_CurrentSensor" 0 0 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+S -350 -1200 100 -1950 0 1 0 N
+X GND ~ -200 -1150 100 D 50 50 1 1 B
+X LOAD_IN ~ -200 -2000 100 U 50 50 1 1 B
+X LOAD_OUT ~ 0 -2000 100 U 50 50 1 1 B
+X OUT ~ -100 -1150 100 D 50 50 1 1 O
+X VCC ~ 0 -1150 100 D 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
+# feather-smart-thermostat-rescue_DiscThermostat
+#
+DEF feather-smart-thermostat-rescue_DiscThermostat S 0 40 Y Y 1 F N
+F0 "S" 0 0 50 H V C CNN
+F1 "feather-smart-thermostat-rescue_DiscThermostat" 0 0 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+C 0 -150 71 0 1 0 N
+P 9 0 1 0 -50 -50 50 -50 150 -100 150 -200 50 -250 -50 -250 -150 -200 -150 -100 -50 -50 N
+X ~ ~ -250 -150 100 R 50 50 1 1 W
+X ~ ~ 250 -150 100 L 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
 # feather-smart-thermostat-rescue_FeatherHuzzahBoard-components
 #
 DEF feather-smart-thermostat-rescue_FeatherHuzzahBoard-components U 0 40 Y Y 1 F N
@@ -106,6 +138,22 @@ X GND ~ -300 550 100 D 50 50 1 1 P
 X NC ~ -200 -350 100 U 50 50 1 1 w
 X NO ~ -400 -350 100 U 50 50 1 1 w
 X VIN ~ -400 550 100 D 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
+# power_AC
+#
+DEF power_AC #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -100 50 H I C CNN
+F1 "power_AC" 0 250 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+A -25 125 25 1 1799 0 1 10 N 0 125 -50 125
+A 25 125 25 -1799 -1 0 1 10 N 0 125 50 125
+C 0 125 75 0 1 10 N
+P 2 0 1 0 0 0 0 50 N
+X AC 1 0 0 0 U 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
