@@ -136,6 +136,7 @@ static void publish_updates(State& state) {
 
 void Networking::update(State& state) {
   if (WiFi.status() == WL_CONNECTED) {
+    wifi_online = 1;
     if (mqttclient->connected()) {
       mqttclient->processPackets(100);
       publish_updates(state);
@@ -166,5 +167,7 @@ void Networking::update(State& state) {
     if (count_wifi_attempt < 10) {
       attempt_wifi_connection();
     }
-  }  
+  }
+  state.wifi_online = wifi_online;
+  state.mqtt_online = mqtt_online;
 }
