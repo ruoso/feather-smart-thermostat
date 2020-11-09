@@ -116,7 +116,7 @@ Wire Wire Line
 Wire Wire Line
 	6250 4800 6900 4800
 Wire Wire Line
-	6900 4800 6900 1950
+	6900 4800 6900 2000
 Wire Wire Line
 	6900 1950 4350 1950
 Wire Wire Line
@@ -274,20 +274,75 @@ Entry Wire Line
 Wire Wire Line
 	2750 5750 6600 5750
 Wire Wire Line
-	7000 4700 7000 1850
-Wire Wire Line
-	6250 4700 7000 4700
-Wire Wire Line
 	7100 5000 6250 5000
 Wire Wire Line
-	7000 4700 7000 4900
-Wire Wire Line
 	7000 4900 6250 4900
-Wire Bus Line
-	8850 1700 8850 6700
+Wire Wire Line
+	7100 1750 7100 1800
+Wire Wire Line
+	7000 1850 7000 1900
+$Comp
+L Device:R R?
+U 1 1 5FA950D5
+P 8000 1800
+F 0 "R?" V 7793 1800 50  0000 C CNN
+F 1 "R" V 7884 1800 50  0000 C CNN
+F 2 "" V 7930 1800 50  0001 C CNN
+F 3 "~" H 8000 1800 50  0001 C CNN
+	1    8000 1800
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5FA95194
+P 7800 1900
+F 0 "R?" V 7593 1900 50  0000 C CNN
+F 1 "R" V 7684 1900 50  0000 C CNN
+F 2 "" V 7730 1900 50  0001 C CNN
+F 3 "~" H 7800 1900 50  0001 C CNN
+	1    7800 1900
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5FA9524D
+P 7550 2000
+F 0 "R?" V 7343 2000 50  0000 C CNN
+F 1 "R" V 7434 2000 50  0000 C CNN
+F 2 "" V 7480 2000 50  0001 C CNN
+F 3 "~" H 7550 2000 50  0001 C CNN
+	1    7550 2000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7700 2000 8750 2000
+Wire Wire Line
+	7100 1800 7850 1800
+Connection ~ 7100 1800
+Wire Wire Line
+	8150 1800 8750 1800
+Wire Wire Line
+	7950 1900 8750 1900
+Entry Wire Line
+	8750 1800 8850 1900
+Entry Wire Line
+	8750 1900 8850 2000
+Entry Wire Line
+	8750 2000 8850 2100
+Wire Wire Line
+	7100 1800 7100 5000
+Wire Wire Line
+	7650 1900 7000 1900
+Connection ~ 7000 1900
+Wire Wire Line
+	7000 1900 7000 4900
+Wire Wire Line
+	7400 2000 6900 2000
 Wire Bus Line
 	2650 1850 2650 6500
-Connection ~ 7000 4700
+Wire Bus Line
+	8850 1700 8850 6700
+Connection ~ 6900 2000
 Wire Wire Line
-	7100 1750 7100 5000
+	6900 2000 6900 1950
 $EndSCHEMATC
