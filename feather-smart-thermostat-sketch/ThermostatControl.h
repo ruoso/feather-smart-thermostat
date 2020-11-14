@@ -59,7 +59,7 @@ namespace Thermostat {
         variance += difference * difference;
       }
 
-      if (variance > 0.1) {
+      if (variance > 0.01) {
         state.actual_current = 1;
       } else {
         state.actual_current = 0;
