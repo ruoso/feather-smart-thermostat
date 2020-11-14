@@ -26,6 +26,7 @@ struct publishing_helper {
   Adafruit_MQTT_Publish *topic;
   int publish_count;
   bool always_publish;
+  bool is_square;
   bool should_publish(T newval) {
     unsigned long now = millis();
     if (!publish_count || ((value != newval) && (always_publish || (now - time > 60000))) || now - time > 600000) {
@@ -37,7 +38,11 @@ struct publishing_helper {
     return false;
   }
   void publish(T newval) {
+    T oldval = value;
     if (should_publish(newval)) {
+      if (is_square) {
+        topic->publish(oldval);
+      }
       if (topic->publish(newval)) {
         Serial.println("Published new data to MQTT");
       } else {
@@ -114,6 +119,7 @@ void Networking::setup(Config& config_in) {
   ph_actual_humidity.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_actual_humidity.c_str());
   ph_actual_current.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_actual_current.c_str());
   ph_actual_current.always_publish = 1;
+  ph_actual_current.is_square = 1;
   ph_ramp_up_buffer.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_ramp_up_buffer.c_str());
   ph_ramp_up_buffer.always_publish = 1;
   ph_cool_down_buffer.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_cool_down_buffer.c_str());

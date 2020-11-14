@@ -26,6 +26,7 @@ namespace Thermostat {
     const static int current_a_pin = 39;
     float moving_samples[10] = {0,0,0,0,0,0,0,0,0,0};
     int moving_samples_index = 0;
+    int quiet_log_control = 0;
     Sensors() {
     }
     void setup() {
@@ -65,6 +66,9 @@ namespace Thermostat {
         state.actual_current = 0;
       }
 
+      if (quiet_log_control++ % 100 == 0) {
+        Serial.println("Current samples avg: " + String(avg) + ", variance: " + String(variance) + " Result: "+String(state.actual_current));
+      }
       moving_samples_index++;
     }
   };
