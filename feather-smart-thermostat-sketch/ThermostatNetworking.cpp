@@ -28,7 +28,7 @@ struct publishing_helper {
   bool always_publish;
   bool should_publish(T newval) {
     unsigned long now = millis();
-    if (!publish_count || (value != newval && (always_publish || (now - time > 60000))) || now - time > 600000) {
+    if (!publish_count || ((value != newval) && (always_publish || (now - time > 60000))) || now - time > 600000) {
       publish_count++;
       value = newval;
       time = now;
@@ -51,6 +51,8 @@ static publishing_helper<const char*> ph_action;
 static publishing_helper<float> ph_actual_temperature;
 static publishing_helper<float> ph_actual_humidity;
 static publishing_helper<float> ph_actual_current;
+static publishing_helper<float> ph_ramp_up_buffer;
+static publishing_helper<float> ph_cool_down_buffer;
 static publishing_helper<float> ph_target_temperature;
 
 static  Adafruit_MQTT_Subscribe *mqtt_topic_temperature_command;
@@ -112,6 +114,10 @@ void Networking::setup(Config& config_in) {
   ph_actual_humidity.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_actual_humidity.c_str());
   ph_actual_current.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_actual_current.c_str());
   ph_actual_current.always_publish = 1;
+  ph_ramp_up_buffer.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_ramp_up_buffer.c_str());
+  ph_ramp_up_buffer.always_publish = 1;
+  ph_cool_down_buffer.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_cool_down_buffer.c_str());
+  ph_cool_down_buffer.always_publish = 1;
   ph_target_temperature.topic = new Adafruit_MQTT_Publish(mqttclient, config->mqtt_topic_target_temperature.c_str());
   ph_target_temperature.always_publish = 1;
   mqtt_topic_temperature_command = new Adafruit_MQTT_Subscribe(mqttclient, config->mqtt_topic_temperature_command.c_str());
@@ -131,6 +137,8 @@ static void publish_updates(State& state) {
   ph_actual_temperature.publish(state.actual_temperature);
   ph_actual_humidity.publish(state.actual_humidity);
   ph_actual_current.publish(state.actual_current);
+  ph_ramp_up_buffer.publish(state.ramp_up_buffer);
+  ph_cool_down_buffer.publish(state.cool_down_buffer);
   ph_target_temperature.publish(state.set_temperature);
 }
 

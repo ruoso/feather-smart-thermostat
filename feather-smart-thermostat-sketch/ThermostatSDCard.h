@@ -177,6 +177,20 @@ namespace Thermostat {
         return;
       }
 
+      if (j_topics.containsKey("ramp_up_buffer")) {
+        config.mqtt_topic_ramp_up_buffer = j_topics["ramp_up_buffer"].as<char*>();
+      } else {
+        Serial.println("Missing configuration key: mqtt.topics.ramp_up_buffer");
+        return;
+      }
+
+      if (j_topics.containsKey("cool_down_buffer")) {
+        config.mqtt_topic_cool_down_buffer = j_topics["cool_down_buffer"].as<char*>();
+      } else {
+        Serial.println("Missing configuration key: mqtt.topics.cool_down_buffer");
+        return;
+      }
+ 
       if (j_topics.containsKey("target_temperature")) {
         config.mqtt_topic_target_temperature = j_topics["target_temperature"].as<char*>();
       } else {
@@ -207,10 +221,22 @@ namespace Thermostat {
       }
 
       if (j_temperature.containsKey("variance")) {
-        config.temperature_variance = j_temperature["variance"].as<int>();
+        config.temperature_variance = j_temperature["variance"].as<float>();
       } else {
         Serial.println("Missing configuration key: temperature.variance");
         return;
+      }
+
+      if (j_temperature.containsKey("ramp_up_buffer")) {
+        config.ramp_up_buffer = j_temperature["ramp_up_buffer"].as<float>();
+      } else {
+        config.ramp_up_buffer = 0;
+      }
+
+      if (j_temperature.containsKey("cool_down_buffer")) {
+        config.cool_down_buffer = j_temperature["cool_down_buffer"].as<float>();
+      } else {
+        config.cool_down_buffer = 0;
       }
 
       Serial.println("Configuration loaded.");

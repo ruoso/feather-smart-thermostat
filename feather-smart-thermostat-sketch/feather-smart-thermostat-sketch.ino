@@ -45,6 +45,8 @@ void setup() {
   if (config.loaded) {
     state.set_temperature = config.temperature_starting;
     state.variance = config.temperature_variance;
+    state.ramp_up_buffer = config.ramp_up_buffer;
+    state.cool_down_buffer = config.cool_down_buffer;
 
     Serial.println("Starting networking");
     networking.setup(config);

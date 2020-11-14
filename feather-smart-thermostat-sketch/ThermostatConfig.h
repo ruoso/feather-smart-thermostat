@@ -18,10 +18,14 @@ namespace Thermostat {
     std::string mqtt_topic_actual_temperature;
     std::string mqtt_topic_actual_humidity;
     std::string mqtt_topic_actual_current;
+    std::string mqtt_topic_ramp_up_buffer;
+    std::string mqtt_topic_cool_down_buffer;
     std::string mqtt_topic_target_temperature;
     std::string mqtt_topic_temperature_command;
     int temperature_starting;
-    int temperature_variance;
+    float temperature_variance;
+    float ramp_up_buffer;
+    float cool_down_buffer;
   };
 }
 

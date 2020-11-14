@@ -73,33 +73,55 @@ The sample file below explains the expected format:
 
 ```
 {
-	"wifi": {
-		"ssid": "",
-	    "password": ""
-	},
-	"mqtt": {
-		"broker_host": "",
+    "wifi": {
+        "ssid": "",
+        "password": ""
+    },
+    "mqtt": {
+        "broker_host": "",
         "broker_port": 1883,
-		"clientid": "",
-		"username": "",
-		"password": "",
-		"topics": {
-			"action": "",
-			"actual_temperature": "",
-			"actual_humidity": "",
-			"actual_current": "",
-			"target_temperature": "",
-			"temperature_command": ""
-		}
-	},
-	"temperature": {
-		"starting": 28,
-		"variance": 1
-	}
+        "clientid": "",
+        "username": "",
+        "password": "",
+        "topics": {
+            "action": "",
+            "actual_temperature": "",
+            "actual_humidity": "",
+            "actual_current": "",
+            "target_temperature": "",
+            "ramp_up_buffer": "",
+            "cool_down_buffer": "",
+            "temperature_command": ""
+        }
+    },
+    "temperature": {
+        "starting": 21,
+        "variance": 1,
+        "ramp_up_buffer": 0.1,
+        "cool_down_buffer": 0.1
+    }
 }
 
 ```
 
-Most items are self-explanatory. The `variance` setting is how much
-change on the temperature in celsius is after a change in status is
-necessary for a new change in status.
+Most items are self-explanatory. The temperature section requires some explanation:
+
+ * `starting`: Value of target temperature on reset, such as when
+   returning from a power outage.
+
+ * `variance`: This configures how wide should the control allow the
+   temperature to vary. For instance, if you have the target set to
+   21, and a variance set to 1, the ambient temperature should vary
+   between 20.5 and 21.5 degrees.
+
+ * `ramp_up_buffer` (Optional): How many degrees before the low end of
+   the variance to turn the heater on, such that we don't get below
+   the target variance due to the ramp up time of the heater
+   element. This is the initial value, which will be automatically
+   adjusted over time.
+
+ * `cool_down_buffer` (Optional): How many degrees before the high end
+   of the variance to turn the heater off, such that we don't get
+   above the target variance due to residual heat after we turn the
+   heater element off. This is the initial value, which will be
+   automatically adjusted over time.

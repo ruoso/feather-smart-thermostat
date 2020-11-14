@@ -3,6 +3,7 @@
 
 #include <sstream>
 
+#include <Adafruit_EPD.h>
 #include <Adafruit_GFX.h> 
 #include <Fonts/FreeSans9pt7b.h>
 #include <Fonts/FreeSerifBold24pt7b.h>
@@ -158,7 +159,7 @@ namespace Thermostat {
       epd.drawRect(margin, margin, epd.width() - margin*2, epd.height() - margin*2, EPD_BLACK);
       epd.fillRect(margin*2, margin*2, epd.width() - margin*4, rect_height, EPD_BLACK);
 
-      epd.setTextColor(EPD_INVERSE);
+      epd.setTextColor(EPD_WHITE);
       epd.setFont(func_font);
 
       int16_t x,y;
@@ -176,7 +177,7 @@ namespace Thermostat {
 
     void print_humidity(float humidity, int rect_height, int margin) {
       
-      epd.setTextColor(EPD_INVERSE);
+      epd.setTextColor(EPD_BLACK);
       epd.setFont(func_font);
 
       int16_t x,y;
