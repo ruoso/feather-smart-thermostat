@@ -109,10 +109,10 @@ namespace Thermostat {
 
     void print_temperature(float temperature, int slot, bool convert_temperature_to_f) {
 
-      int display_temperature = int(temperature);
+      int display_temperature = std::lround(temperature);
       std::string unit = "C";
       if (convert_temperature_to_f) {
-        display_temperature = int((temperature * 9 / 5) + 32);
+        display_temperature = std::lround((temperature * 9 / 5) + 32);
         unit = "F";
       }
       
