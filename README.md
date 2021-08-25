@@ -8,7 +8,7 @@
    wing
  
  * a [I2C SHT31-D](https://www.adafruit.com/product/2857) temperature
-   and humity sensor
+   and humidity sensor
  
  * a single channel relay
  
